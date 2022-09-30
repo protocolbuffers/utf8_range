@@ -1,8 +1,9 @@
 # How to Contribute
 
 This repository is currently a read-only clone of internal Google code for use
-in open-source projects.  If you'd like to contribute, please reach out to us to
-discuss your proposed changes.
+in open-source projects.  We don't currently have a mechanism to upstream
+changes, but if you'd like to contribute, please reach out to us to discuss your
+proposed changes.
 
 ## Contributor License Agreement
 
