@@ -22,6 +22,7 @@ jobs:
           - { NAME: "Optmized", CC: clang, os: ubuntu-20.04, flags: "-c opt" }
           - { NAME: "GCC Optimized", CC: gcc, os: ubuntu-20.04, flags: "-c opt" }
           - { NAME: "ASAN", CC: clang, os: ubuntu-20.04, flags: "--config=asan -c dbg" }
+          - { NAME: "MSAN", CC: clang, os: ubuntu-20.04, flags: "--config=msan -c dbg --test_tag_filters=-fuzz-test" }
           - { NAME: "UBSAN", CC: clang, os: ubuntu-20.04, flags: "--config=ubsan -c dbg", install: "libunwind-dev" }
           - { NAME: "macOS", CC: clang, os: macos-11, flags: "" }
 

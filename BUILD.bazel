@@ -33,6 +33,16 @@ cc_library(
     ],
 )
 
+cc_test(
+    name = "utf8_validity_test",
+    srcs = ["utf8_validity_test.cc"],
+    deps = [
+        ":utf8_validity",
+        "@com_google_absl//absl/strings",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
+
 cc_fuzz_test(
     name = "utf8_validity_fuzzer",
     testonly = 1,
