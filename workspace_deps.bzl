@@ -9,3 +9,10 @@ def utf8_range_deps():
         strip_prefix = "abseil-cpp-8c0b94e793a66495e0b1f34a5eb26bd7dc672db0",
         sha256 = "b9f490fae1c0d89a19073a081c3c588452461e5586e4ae31bc50a8f36339135e",
     )
+    maybe(
+        http_archive,
+        name = "rules_fuzzing",
+        sha256 = "d9002dd3cd6437017f08593124fdd1b13b3473c7b929ceb0e60d317cb9346118",
+        strip_prefix = "rules_fuzzing-0.3.2",
+        urls = ["https://github.com/bazelbuild/rules_fuzzing/archive/v0.3.2.zip"],
+    )
