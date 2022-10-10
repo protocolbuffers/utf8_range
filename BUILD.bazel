@@ -4,8 +4,6 @@
 # license that can be found in the LICENSE file or at
 # https://opensource.org/licenses/MIT.
 
-load("@rules_fuzzing//fuzzing:cc_defs.bzl", "cc_fuzz_test")
-
 package(
     default_visibility = ["//visibility:public"],
 )
@@ -56,12 +54,4 @@ cc_test(
         "@com_google_absl//absl/strings",
         "@com_google_googletest//:gtest_main",
     ],
-)
-
-cc_fuzz_test(
-    name = "utf8_validity_fuzzer",
-    testonly = 1,
-    srcs = ["utf8_validity_fuzzer.cc"],
-    dicts = ["utf8_fuzzer.dict"],
-    deps = [":utf8_validity"],
 )
