@@ -25,7 +25,7 @@ jobs:
           - { NAME: "UBSAN", CC: clang, os: ubuntu-20.04, flags: "--config=ubsan -c dbg", install: "libunwind-dev" }
           - { NAME: "macOS", CC: clang, os: macos-11, flags: "" }
 
-    name: ${{ matrix.NAME }}
+    name: Bazel ${{ matrix.NAME }}
 
     steps:
       - uses: actions/checkout@v2
