@@ -16,11 +16,18 @@ add_library (utf8_range STATIC
   range2-neon.c
   range2-sse.c
 )
-target_include_directories (utf8_range PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_sources (utf8_range PUBLIC FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
+  FILES utf8_range.h
+)
 
 ##
 # A heavier-weight C++ wrapper that supports Abseil.
 add_library (utf8_validity STATIC utf8_validity.cc)
+target_sources (utf8_validity PUBLIC FILE_SET HEADERS
+  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
+  FILES utf8_validity.h
+)
 
 # Load Abseil dependency.
 if (NOT ABSL_ROOT_DIR)
@@ -34,7 +41,6 @@ endif ()
 target_link_libraries(utf8_validity PUBLIC absl::strings)
 
 # Configure tests.
-option (utf8_range_ENABLE_TESTS "Build test suite" ON)
 if (utf8_range_ENABLE_TESTS)
   enable_testing()
 
@@ -54,12 +60,12 @@ endif ()
 # Configure installation.
 if (utf8_range_ENABLE_INSTALL)
   install(EXPORT ${PROJECT_NAME}Targets
-    NAMESPACE utf8_range::
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
   )
-  install(TARGETS utf8_validity EXPORT ${PROJECT_NAME}Targets
+  install(TARGETS utf8_validity utf8_range EXPORT ${PROJECT_NAME}Targets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        FILE_SET HEADERS
   )
 endif ()
