@@ -16,18 +16,10 @@ add_library (utf8_range STATIC
   range2-neon.c
   range2-sse.c
 )
-target_sources (utf8_range PUBLIC FILE_SET HEADERS
-  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-  FILES utf8_range.h
-)
 
 ##
 # A heavier-weight C++ wrapper that supports Abseil.
 add_library (utf8_validity STATIC utf8_validity.cc)
-target_sources (utf8_validity PUBLIC FILE_SET HEADERS
-  BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-  FILES utf8_validity.h
-)
 
 # Load Abseil dependency.
 if (NOT ABSL_ROOT_DIR)
@@ -66,6 +58,7 @@ if (utf8_range_ENABLE_INSTALL)
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        FILE_SET HEADERS
   )
+  # Install public headers explicitly.
+  install(FILES utf8_range.h utf8_validity.h TYPE INCLUDE)
 endif ()
