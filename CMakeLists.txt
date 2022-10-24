@@ -51,14 +51,30 @@ endif ()
 
 # Configure installation.
 if (utf8_range_ENABLE_INSTALL)
-  install(EXPORT ${PROJECT_NAME}Targets
+  include(CMakePackageConfigHelpers)
+  include(GNUInstallDirs)
+
+  install(EXPORT ${PROJECT_NAME}-targets
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+    NAMESPACE utf8_range::
   )
-  install(TARGETS utf8_validity utf8_range EXPORT ${PROJECT_NAME}Targets
+  install(TARGETS utf8_validity utf8_range EXPORT ${PROJECT_NAME}-targets
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
+
+  configure_package_config_file(
+    cmake/${PROJECT_NAME}-config.cmake.in
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+  )
+  install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+  )
+
   # Install public headers explicitly.
-  install(FILES utf8_range.h utf8_validity.h TYPE INCLUDE)
+  install(FILES utf8_range.h utf8_validity.h
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+  )
 endif ()

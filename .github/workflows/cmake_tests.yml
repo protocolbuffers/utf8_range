@@ -55,5 +55,7 @@ jobs:
         run: cd ${{ github.workspace }} && cmake . -DABSL_ROOT_DIR=/tmp/abseil-cpp -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR
       - name: Build
         run: cd ${{ github.workspace }} && cmake --build . -j20
+      - name: Install
+        run: cd ${{ github.workspace }} && make install
       - name: Test
         run: cd ${{ github.workspace }} && ctest
