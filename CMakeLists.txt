@@ -22,13 +22,14 @@ add_library (utf8_range STATIC
 add_library (utf8_validity STATIC utf8_validity.cc)
 
 # Load Abseil dependency.
-if (NOT ABSL_ROOT_DIR)
-  find_package(absl REQUIRED CONFIG)
-endif ()
 if (NOT TARGET absl::strings)
-  set(ABSL_ENABLE_INSTALL ${utf8_range_ENABLE_INSTALL})
-  set(ABSL_PROPAGATE_CXX_STD ON)
-  add_subdirectory(${ABSL_ROOT_DIR} third_party/abseil-cpp)
+  if (NOT ABSL_ROOT_DIR)
+    find_package(absl REQUIRED CONFIG)
+  else ()
+    set(ABSL_ENABLE_INSTALL ${utf8_range_ENABLE_INSTALL})
+    set(ABSL_PROPAGATE_CXX_STD ON)
+    add_subdirectory(${ABSL_ROOT_DIR} third_party/abseil-cpp)
+  endif ()
 endif ()
 target_link_libraries(utf8_validity PUBLIC absl::strings)
 
