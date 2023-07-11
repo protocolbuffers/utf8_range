@@ -46,6 +46,7 @@ TEST(Utf8Validity, IsStructurallyValid) {
   EXPECT_TRUE(IsStructurallyValid("ab\xc2\x81"));                   // 2-byte
   EXPECT_TRUE(IsStructurallyValid("a\xe2\x81\x81"));                // 3-byte
   EXPECT_TRUE(IsStructurallyValid("\xf2\x81\x81\x81"));             // 4
+  EXPECT_TRUE(IsStructurallyValid("abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdd")); 
 
   // Test simple bad strings
   EXPECT_FALSE(IsStructurallyValid("abc\x80"));           // bad char

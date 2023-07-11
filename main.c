@@ -14,9 +14,15 @@ int utf8_boost(const unsigned char *data, int len);
 int utf8_lemire(const unsigned char *data, int len);
 int utf8_range(const unsigned char *data, int len);
 int utf8_range2(const unsigned char *data, int len);
+int utf8dfa_2dfa(const unsigned char*, int);
+int utf8dfa_5dfa(const unsigned char*, int);
 #ifdef __AVX2__
 int utf8_lemire_avx2(const unsigned char *data, int len);
 int utf8_range_avx2(const unsigned char *data, int len);
+int utf8vec_avx2(const unsigned char *data, int len);
+#endif
+#ifdef __AVX512F__
+int utf8vec_avx512(const unsigned char *data, int len);
 #endif
 
 static struct ftab {
@@ -43,6 +49,14 @@ static struct ftab {
         .name = "range2",
         .func = utf8_range2,
     },
+    {
+        .name = "utf8dfa_2dfa",
+        .func = utf8dfa_2dfa,
+    },
+    {
+        .name = "utf8dfa_5dfa",
+        .func = utf8dfa_5dfa,
+    },
 #ifdef __AVX2__
     {
         .name = "lemire_avx2",
@@ -51,6 +65,16 @@ static struct ftab {
     {
         .name = "range_avx2",
         .func = utf8_range_avx2,
+    },
+    {
+        .name = "utf8vec_avx2",
+        .func = utf8vec_avx2,
+    },
+#endif
+#ifdef __AVX512F__
+    {
+        .name = "utf8vec_avx-512",
+        .func = utf8vec_avx512,
     },
 #endif
 #ifdef BOOST

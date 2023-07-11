@@ -19,7 +19,7 @@ add_library (utf8_range STATIC
 
 ##
 # A heavier-weight C++ wrapper that supports Abseil.
-add_library (utf8_validity STATIC utf8_validity.cc)
+add_library (utf8_validity STATIC utf8dfa.cpp utf8vec.cpp utf8_validity.cc)
 
 # Load Abseil dependency.
 if (NOT TARGET absl::strings)
@@ -38,9 +38,10 @@ if (utf8_range_ENABLE_TESTS)
   enable_testing()
 
   find_package(GTest REQUIRED)
+  include_directories(${GTEST_INCLUDE_DIRS})
 
   add_executable(tests utf8_validity_test.cc)
-  target_link_libraries(tests utf8_validity GTest::gmock_main)
+  target_link_libraries(tests utf8_validity gmock gmock_main)
 
   add_test(NAME utf8_validity_test COMMAND tests)
 
@@ -80,7 +81,7 @@ if (utf8_range_ENABLE_INSTALL)
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 
   # Install public headers explicitly.
-  install(FILES utf8_range.h utf8_validity.h
+  install(FILES utf8_range.h utf8_validity.h utf8.h utf8-simd.h utils.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   )
 endif ()
