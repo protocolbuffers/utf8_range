@@ -1,3 +1,8 @@
+**As of November 9, 2023, utf8_range has moved into the protobuf repo
+[here](https://github.com/protocolbuffers/protobuf/tree/main/third_party/utf8_range).
+All further development is happening there, and this repo is no longer being
+updated.**
+
 [![Build Status](https://travis-ci.com/cyb70289/utf8.svg?branch=master)](https://travis-ci.com/cyb70289/utf8)
 
 # Fast UTF-8 validation with Range algorithm (NEON+SSE4+AVX2)
